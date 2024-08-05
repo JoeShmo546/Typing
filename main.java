@@ -4,14 +4,18 @@ import java.io.*;
 /*
  *  get a random word from a file
  *  add it to a buffer
+ *  display it 
  *  collect user input 
+ *  reset cursor
  *  compare user input to the first word in the buffer
+ *  if right add a point
  *
  */
 
 public class main {
 
     public static String file = "words.txt";
+    public static String[] buffer = new String[100];
 
     public static String getWord(){
 
@@ -39,10 +43,11 @@ public class main {
 
     public static void main(String[] args){
         
-        for (int i = 0; i < 10; i++){
+        for (int i = 0; i < 100; i++){
+            buffer[i] = getWord();
             System.out.print(getWord() + " ");
         }
-        System.out.println();
+        System.out.println(Arrays.toString(buffer));
 
 
     }
