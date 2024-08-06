@@ -54,7 +54,7 @@ public class main {
             System.out.print(buffer[i] + " ");
         }
 
-        System.out.println("" + YELLOW);
+        System.out.println("\033[8A" + YELLOW);
 
         // collect user input
         Scanner scanner = new Scanner(System.in); 
