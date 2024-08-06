@@ -5,7 +5,7 @@ import java.io.*;
  *  get a random word from a file /
  *  add it to a buffer / 
  *  display it / 
- *  collect user input 
+ *  collect user input /
  *  reset cursor
  *  compare user input to the first word in the buffer
  *  if right add a point
@@ -15,7 +15,11 @@ import java.io.*;
 public class main {
 
     public static String file = "words.txt";
-    public static String[] buffer = new String[100];
+    public static String[] buffer = new String[1000];
+    // colors
+    public static final String RESET = "\033[0m";
+    public static final String YELLOW = "\033[0;33m";
+
 
     public static String getWord(){
 
@@ -50,7 +54,7 @@ public class main {
             System.out.print(buffer[i] + " ");
         }
 
-        System.out.println("");
+        System.out.println("" + YELLOW);
 
         // collect user input
         Scanner scanner = new Scanner(System.in); 
@@ -58,12 +62,12 @@ public class main {
         
         String[] inputArray = input.split(" ");
         
-
+        System.out.println(RESET);
+        
         for (int i = 0; i < inputArray.length; i++){
-
-            if (buffer[i].equals(inputArray[i])){
+            if ((buffer[i].equals(inputArray[i])) && (i <= buffer.length)){
                 ++points;
-            } 
+            }
 
         }
         
