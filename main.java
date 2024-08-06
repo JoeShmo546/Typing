@@ -2,9 +2,9 @@ import java.util.*;
 import java.io.*;
 
 /*
- *  get a random word from a file
- *  add it to a buffer
- *  display it 
+ *  get a random word from a file /
+ *  add it to a buffer / 
+ *  display it / 
  *  collect user input 
  *  reset cursor
  *  compare user input to the first word in the buffer
@@ -16,6 +16,7 @@ public class main {
 
     public static String file = "words.txt";
     public static String[] buffer = new String[100];
+    public static int points = 0;
 
     public static String getWord(){
 
@@ -40,15 +41,31 @@ public class main {
         return "nothing";
 
     }
-
     public static void main(String[] args){
         
+        // assign words to buffer and display them
         for (int i = 0; i < 100; i++){
             buffer[i] = getWord();
             System.out.print(getWord() + " ");
         }
-        System.out.println(Arrays.toString(buffer));
 
+        // collect user input
+        Scanner scanner = new Scanner(System.in); 
+        String input = scanner.nextLine();
+        
+        String[] inputArray = input.split(" ");
+        
+        // compare user input to correct input
+        for (String word : buffer){
+            for (String typedWord : inputArray){
+
+                if (typedWord.equals(word)){
+                    points++;
+                }
+            }
+        }
+        
+        System.out.println("you got " + points + " words correct");
 
     }
 }
