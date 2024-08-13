@@ -50,16 +50,23 @@ public class main {
         int lines = 0;
         int width = 80; 
         int currentLine = 0;
+        int[] lineLengths = new int[100];
+        
+        // have the word check occur every character
+        // when the character is equal to the special one, start a new line
+        // 
 
         // assign words to buffer and display them
         for (int i = 0; i < 100; i++){
+
             buffer[i] = getWord();
 
             if ((currentLine + (buffer[i].length() + 1)) > width){
-           // if (1 == 2){
+                buffer[i] += "\u200B";
                 System.out.println(buffer[i]);
-                currentLine = 0;
+                lineLengths[lines] = currentLine;
                 lines++;
+                currentLine = 0;
             } else {
                 currentLine += buffer[i].length() + 1;
                 System.out.print(buffer[i] + " ");
@@ -69,17 +76,29 @@ public class main {
 
         System.out.print("\033[" + lines + "A\r" + YELLOW);
 
+        for (String word : buffer){
+            
+        }
+
     }
 
     public static void main(String[] args){
         
         int points = 0;
+        int charsTyped = 0;
         
         printText();
+
+        
 
         // collect user input
         Scanner scanner = new Scanner(System.in); 
         String input = scanner.nextLine();
+
+        while(charsTyped < ){
+
+        }
+
         
         String[] inputArray = input.split(" ");
         
