@@ -1,5 +1,6 @@
 import java.util.*;
 import java.io.*;
+import java.text.*;
 
 /*
  *  get a random word from a file /
@@ -44,17 +45,37 @@ public class main {
         return "nothing";
 
     }
+
+    public static void printText(){
+        int lines = 0;
+        int width = 80; 
+        int currentLine = 0;
+
+        // assign words to buffer and display them
+        for (int i = 0; i < 100; i++){
+            buffer[i] = getWord();
+
+            if ((currentLine + (buffer[i].length() + 1)) > width){
+           // if (1 == 2){
+                System.out.println(buffer[i]);
+                currentLine = 0;
+                lines++;
+            } else {
+                currentLine += buffer[i].length() + 1;
+                System.out.print(buffer[i] + " ");
+            }
+
+        }
+
+        System.out.print("\033[" + lines + "A\r" + YELLOW);
+
+    }
+
     public static void main(String[] args){
         
         int points = 0;
         
-        // assign words to buffer and display them
-        for (int i = 0; i < 100; i++){
-            buffer[i] = getWord();
-            System.out.print(buffer[i] + " ");
-        }
-
-        System.out.println("\033[8A" + YELLOW);
+        printText();
 
         // collect user input
         Scanner scanner = new Scanner(System.in); 
