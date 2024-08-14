@@ -1,6 +1,9 @@
 import java.util.*;
 import java.io.*;
 import java.text.*;
+import java.awt.*;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
 
 /*
  *  get a random word from a file /
@@ -20,6 +23,8 @@ public class main {
     // colors
     public static final String RESET = "\033[0m";
     public static final String YELLOW = "\033[0;33m";
+    public static final String RED = "\u001B[31m";
+
 
 
     public static String getWord(){
@@ -89,27 +94,48 @@ public class main {
         
         printText();
 
-        
-
-        // collect user input
         Scanner scanner = new Scanner(System.in); 
-        String input = scanner.nextLine();
-
-        while(charsTyped < ){
-
-        }
-
         
-        String[] inputArray = input.split(" ");
-        
-        System.out.println(RESET);
-        
-        for (int i = 0; i < inputArray.length; i++){
-            if ((buffer[i].equals(inputArray[i])) && (i <= buffer.length)){
-                ++points;
+        System.out.flush();
+
+        // check user if usere input is correct on a per charectar basis
+        for (String word : buffer){
+            for (int i = 0; i < word.length(); i++){
+
+                // collect a character of user input
+                int character;
+                try {
+                    while ((character = System.in.read()) != -1 && (character = System.in.read()) != KeyEvent.VK_ENTER){
+
+                        try{
+                            Robot robot = new Robot();
+                            robot.keyPress(KeyEvent.VK_ENTER);
+                            robot.keyRelease(KeyEvent.VK_ENTER);
+                            System.out.print("\033[1A");
+
+                        } catch (AWTException e){
+                            e.printStackTrace();
+                        }
+                        System.out.print((char) character);
+
+                        if (character == '\u200B'){ 
+                            System.out.println("\r"); 
+                        } else if (character == word.charAt(i)){
+                            System.out.print(YELLOW);
+                        } else {
+                            System.out.print("\b" + RED + (char) character);
+                        }
+                        System.out.print(YELLOW);
+                    }
+                } catch (IOException e) {
+                    System.out.println("Stoopid IOException occured " + e.getMessage());    
+                }
+
             }
-
         }
+
+        System.out.print(RESET);
+
         
         System.out.println("you got " + points + " words correct");
 
