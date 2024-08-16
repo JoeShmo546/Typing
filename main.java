@@ -19,7 +19,7 @@ import java.awt.event.KeyEvent;
 public class main {
 
     public static String file = "words.txt";
-    public static String[] buffer = new String[1000];
+    public static String[][] buffer = new String[100][100];
 
     // colors
     public static final String RESET = "\033[0m";
@@ -57,24 +57,24 @@ public class main {
     public static void printText(){
         int lines = 0;
         int width = 80; 
-        int currentLine = 0;
+        int currentLineLength = 0;
         int[] lineLengths = new int[100];
         
 
         // assign words to buffer(list of words user needs to type) and display them
         for (int i = 0; i < 100; i++){
 
-            buffer[i] = getWord();
+            buffer[i][lines] = getWord();
 
-            if ((currentLine + (buffer[i].length() + 1)) > width){
-                buffer[i] += "\u200B";
-                System.out.println(buffer[i]);
-                lineLengths[lines] = currentLine;
+            if ((currentLineLength + (buffer[i][lines].length() + 1)) > width){
+                //buffer[i] += "\u200B";
+                System.out.println(buffer[i][lines]);
+                lineLengths[lines] = currentLineLength;
                 lines++;
-                currentLine = 0;
+                currentLineLength = 0;
             } else {
-                currentLine += buffer[i].length() + 1;
-                System.out.print(buffer[i] + " ");
+                currentLineLength += buffer[i][lines].length() + 1;
+                System.out.print(buffer[i][lines] + " ");
             }
 
         }
@@ -83,10 +83,15 @@ public class main {
 
     }
 // need a method which collectsa char of user input and checks it against list of values
-// 1. collect user input as char
+// the point of checking every character is to search for the new line char
+// 1. collect user input as String
 // 2. press "enter"
 // 3. check if char is equal to the correct character or "new line"
 // 4. repeat to step 1
+
+// 1. "buffer" stored in a 2d array, lines and words
+// 2. check every line
+//
 
     public static void charCheck(String inputInt){
 
@@ -103,7 +108,7 @@ public class main {
         //} catch (IOException e) {
         //    System.out.println("Stoopid IOException occured " + e.getMessage());    
         //}
-        
+        System.out.println(inputInt + inputInt.length()); 
 // 2. press "enter"
 
         try{
