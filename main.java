@@ -54,32 +54,38 @@ public class main {
     }
 
 // print text, reset cursor to beginning, injects \u200B to detect end of line :: works
+//
+// simpy: adds a word to each element of buffer 2d array
     public static void printText(){
         int lines = 0;
         int width = 80; 
-        int currentLineLength = 0;
         int[] lineLengths = new int[100];
+        int currentLineLength = 0;
         
 
         // assign words to buffer(list of words user needs to type) and display them
         for (int i = 0; i < 100; i++){
 
-            buffer[i][lines] = getWord();
+            buffer[lines][i] = getWord();
 
-            if ((currentLineLength + (buffer[i][lines].length() + 1)) > width){
-                //buffer[i] += "\u200B";
-                System.out.println(buffer[i][lines]);
-                lineLengths[lines] = currentLineLength;
+            if ((currentLineLength + (buffer[lines][i].length() + 1)) > width){
+                System.out.println(buffer[lines][i] + " ");
                 lines++;
                 currentLineLength = 0;
             } else {
-                currentLineLength += buffer[i][lines].length() + 1;
-                System.out.print(buffer[i][lines] + " ");
+                System.out.print(buffer[lines][i] + " ");
+                currentLineLength += buffer[lines][i].length();
             }
 
         }
 
         System.out.print("\033[" + lines + "A\r" + YELLOW);
+
+        for (int i = 0; i < lines; i++){
+            for (int j = 0; j < buffer[i].length; j++){
+                System.out.println(buffer[i][j]);
+            }
+        }
 
     }
 // need a method which collectsa char of user input and checks it against list of values
