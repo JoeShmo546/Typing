@@ -25,6 +25,7 @@ public class main {
     public static final String RESET = "\033[0m";
     public static final String YELLOW = "\033[0;33m";
     public static final String RED = "\u001B[31m";
+    public static int points = 0;
 
 
 // gets random word from a word.txt file
@@ -87,16 +88,21 @@ public class main {
 // 3. check if char is equal to the correct character or "new line"
 // 4. repeat to step 1
 
-    public static void charCheck(int inputChar){
+    public static void charCheck(String inputInt){
 
 // 1. collect user input as char
-        System.out.flush();
+        //System.out.flush();
 
-        try{
-            inputChar = System.in.read();
-        } catch (IOException e) {
-            System.out.println("Stoopid IOException occured " + e.getMessage());    
+        Scanner scanner = new Scanner(System.in);
+        inputInt = scanner.next();
+        while(inputInt.length()!=1){
+            inputInt = scanner.next();
         }
+        //try{
+        //    inputInt = System.in.read();
+        //} catch (IOException e) {
+        //    System.out.println("Stoopid IOException occured " + e.getMessage());    
+        //}
         
 // 2. press "enter"
 
@@ -104,11 +110,13 @@ public class main {
             Robot robot = new Robot();
             robot.keyPress(KeyEvent.VK_ENTER);
             robot.keyRelease(KeyEvent.VK_ENTER);
-            System.out.print("\033[1A");
+            System.out.print("\033[1A\b");
 
         } catch (AWTException e){
             e.printStackTrace();
         }
+
+        char inputChar = inputInt.charAt(0);
 
 // 3. check if char is equal to the correct character or "new line"
         switch ((char) inputChar) { 
@@ -120,6 +128,7 @@ public class main {
                 break;
             case 'a': 
                 System.out.println("a");
+                points++;
                 break;
         }
 
@@ -128,23 +137,25 @@ public class main {
 // main method
     public static void main(String[] args){
         
-        int points = 0;
         int charsTyped = 0;
         Scanner scanner = new Scanner(System.in); 
-        int inputChar = 0;
+        int inputInt = 0;
 
         printText();
 
-        //for (int i = 0; i < 100; i++){
-        //    inputChar = 0;
-        //    charCheck(inputChar);
-        //}
-        try{
-            int test = System.in.read();
-            System.out.println(test);
-        }catch(IOException e){
-            System.out.println(e);
+        for (int i = 0; i < 100; i++){
+
+            try{
+                int test = System.in.read();
+                System.out.println((char)test);
+            }catch(IOException e){
+                System.out.println(e);
+            }
+
+            inputInt = 0;
+            charCheck("a");
         }
+
 
        // Scanner scanner = new Scanner(System.in); 
        // 
