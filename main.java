@@ -65,14 +65,14 @@ public class main {
         int currentLineLength = 0;
         String word;
 
+        //ArrayList<String> line1 = new ArrayList<>();
+        //buffer.add(line1);
+
         // assign words to buffer(list of words user needs to type) and display them
         for (int i = 0; i < 100; i++){
             
             word = getWord();
-
-            //buffer.add(line);
-            // buffer[lines][i] = getWord();
-
+            
             if ((currentLineLength + (word.length() + 1)) > width){ // determines where to start a new "dimension" in 2d array
                 ArrayList<String> line = new ArrayList<>();
                 System.out.println(word + " ");
@@ -80,6 +80,12 @@ public class main {
                 currentLineLength = 0;
                 buffer.add(line);
             } else {
+                if (buffer.get(0) == null){
+                    ArrayList<String> line = new ArrayList<>();
+                    buffer.add(line);
+                    lines++;
+                }
+                
                 buffer.get(lines).add(word);
                 System.out.print(word + " ");
                 currentLineLength += word.length();
@@ -162,18 +168,18 @@ public class main {
 
         printText();
 
-        for (int i = 0; i < 100; i++){
+        //for (int i = 0; i < 100; i++){
 
-            try{
-                int test = System.in.read();
-                System.out.println((char)test);
-            }catch(IOException e){
-                System.out.println(e);
-            }
+        //    try{
+        //        int test = System.in.read();
+        //        System.out.println((char)test);
+        //    }catch(IOException e){
+        //        System.out.println(e);
+        //    }
 
-            inputInt = 0;
-            charCheck("a");
-        }
+        //    inputInt = 0;
+        //    charCheck("a");
+        //}
 
 
        // Scanner scanner = new Scanner(System.in); 
