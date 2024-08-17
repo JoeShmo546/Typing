@@ -19,7 +19,7 @@ import java.awt.event.KeyEvent;
 public class main {
 
     public static String file = "words.txt";
-    public static String[][] buffer = new String[100][100];
+    public static ArrayList<ArrayList<String>>  buffer = new ArrayList<>();
 
     // colors
     public static final String RESET = "\033[0m";
@@ -56,36 +56,44 @@ public class main {
 // print text, reset cursor to beginning, injects \u200B to detect end of line :: works
 //
 // simpy: adds a word to each element of buffer 2d array
+//      End of line is determined by length of 
+//
+//
     public static void printText(){
         int lines = 0;
         int width = 80; 
-        int[] lineLengths = new int[100];
         int currentLineLength = 0;
-        
+        String word;
 
         // assign words to buffer(list of words user needs to type) and display them
         for (int i = 0; i < 100; i++){
+            
+            word = getWord();
 
-            buffer[lines][i] = getWord();
+            //buffer.add(line);
+            // buffer[lines][i] = getWord();
 
-            if ((currentLineLength + (buffer[lines][i].length() + 1)) > width){
-                System.out.println(buffer[lines][i] + " ");
+            if ((currentLineLength + (word.length() + 1)) > width){ // determines where to start a new "dimension" in 2d array
+                ArrayList<String> line = new ArrayList<>();
+                System.out.println(word + " ");
                 lines++;
                 currentLineLength = 0;
+                buffer.add(line);
             } else {
-                System.out.print(buffer[lines][i] + " ");
-                currentLineLength += buffer[lines][i].length();
+                buffer.get(lines).add(word);
+                System.out.print(word + " ");
+                currentLineLength += word.length();
             }
 
         }
 
         System.out.print("\033[" + lines + "A\r" + YELLOW);
 
-        for (int i = 0; i < lines; i++){
-            for (int j = 0; j < buffer[i].length; j++){
-                System.out.println(buffer[i][j]);
-            }
-        }
+        //for (int i = 0; i < lines; i++){
+        //    for (int j = 0; j < buffer.get(i).size(); j++){
+        //        System.out.println(buffer.get(i).get(j));
+        //    }
+        //}
 
     }
 // need a method which collectsa char of user input and checks it against list of values
