@@ -58,16 +58,17 @@ public class main {
 // simpy: adds a word to each element of buffer 2d array
 //      End of line is determined by length of 
 //
-//
+
+
+
+
+// works
     public static void printText(){
         int lines = 0;
         int width = 80; 
         int currentLineLength = 0;
         String word;
         ArrayList<String> currentList = new ArrayList<>();
-
-        //ArrayList<String> line1 = new ArrayList<>();
-        //buffer.add(line1);
 
         // assign words to buffer(list of words user needs to type) and display them
         for (int i = 0; i < 100; i++){
@@ -92,12 +93,6 @@ public class main {
 
         System.out.print("\033[" + lines + "A\r" + YELLOW);
 
-        //for (int i = 0; i < lines; i++){
-        //    for (int j = 0; j < buffer.get(i).size(); j++){
-        //        System.out.println(buffer.get(i).get(j));
-        //    }
-        //}
-
     }
 // need a method which collectsa char of user input and checks it against list of values
 // the point of checking every character is to search for the new line char
@@ -110,22 +105,30 @@ public class main {
 // 2. check every line
 //
 
-    public static void charCheck(String inputInt){
+    public static void charCheck(){
 
 // 1. collect user input as char
         //System.out.flush();
 
         Scanner scanner = new Scanner(System.in);
-        inputInt = scanner.next();
-        while(inputInt.length()!=1){
-            inputInt = scanner.next();
+       // inputInt = scanner.next();
+       // while(inputInt.length()!=1){
+       //     inputInt = scanner.next();
+       // }
+
+
+        String userInput = scanner.nextLine();
+
+        for (int i = 0; i < buffer.size(); i++){
+            System.out.println();
+            for (int j = 0; j < buffer.get(i).size(); j++){
+                 
+                if (userInput.equals(buffer.get(i).get(j))){
+                    points++;
+                }
+            }
         }
-        //try{
-        //    inputInt = System.in.read();
-        //} catch (IOException e) {
-        //    System.out.println("Stoopid IOException occured " + e.getMessage());    
-        //}
-        System.out.println(inputInt + inputInt.length()); 
+
 // 2. press "enter"
 
         try{
@@ -138,21 +141,21 @@ public class main {
             e.printStackTrace();
         }
 
-        char inputChar = inputInt.charAt(0);
+        //char inputChar = inputInt.charAt(0);
 
 // 3. check if char is equal to the correct character or "new line"
-        switch ((char) inputChar) { 
-            case '\n': 
-                System.out.println("Enter");
-                break;
-            case '\u200B': 
-                System.out.println("End of line");
-                break;
-            case 'a': 
-                System.out.println("a");
-                points++;
-                break;
-        }
+       // switch ((char) inputChar) { 
+       //     case '\n': 
+       //         System.out.println("Enter");
+       //         break;
+       //     case '\u200B': 
+       //         System.out.println("End of line");
+       //         break;
+       //     case 'a': 
+       //         System.out.println("a");
+       //         points++;
+       //         break;
+       // }
 
     }
 
@@ -160,10 +163,11 @@ public class main {
     public static void main(String[] args){
         
         int charsTyped = 0;
-        Scanner scanner = new Scanner(System.in); 
         int inputInt = 0;
+        Scanner scanner = new Scanner(System.in); 
 
         printText();
+        charCheck();
 
         //for (int i = 0; i < 100; i++){
 
