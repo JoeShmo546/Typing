@@ -19,7 +19,7 @@ import java.awt.event.KeyEvent;
 public class main {
 
     public static String file = "words.txt";
-    public static ArrayList<ArrayList<String>>  buffer = new ArrayList<>();
+    public static ArrayList<ArrayList<String>> buffer = new ArrayList<>();
 
     // colors
     public static final String RESET = "\033[0m";
@@ -64,6 +64,7 @@ public class main {
         int width = 80; 
         int currentLineLength = 0;
         String word;
+        ArrayList<String> currentList = new ArrayList<>();
 
         //ArrayList<String> line1 = new ArrayList<>();
         //buffer.add(line1);
@@ -72,7 +73,9 @@ public class main {
         for (int i = 0; i < 100; i++){
             
             word = getWord();
-            
+            ArrayList<String> lineone = new ArrayList<>();
+            buffer.add(lineone);
+
             if ((currentLineLength + (word.length() + 1)) > width){ // determines where to start a new "dimension" in 2d array
                 ArrayList<String> line = new ArrayList<>();
                 System.out.println(word + " ");
@@ -80,12 +83,6 @@ public class main {
                 currentLineLength = 0;
                 buffer.add(line);
             } else {
-                if (buffer.get(0) == null){
-                    ArrayList<String> line = new ArrayList<>();
-                    buffer.add(line);
-                    lines++;
-                }
-                
                 buffer.get(lines).add(word);
                 System.out.print(word + " ");
                 currentLineLength += word.length();
