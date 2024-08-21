@@ -180,10 +180,16 @@ public class main {
         
         int charsTyped = 0;
         int inputInt = 0;
-        Scanner scanner = new Scanner(System.in); 
+        String entireUserInput = "";
 
         printText();
-        charCheck();
+        //charCheck();
+        
+        for (int i = 0; i < buffer.size(); i++){
+            entireUserInput += userInput(buffer.get(i).size());
+            //System.out.println(buffer.get(i).size());
+        }
+
 
         //for (int i = 0; i < 100; i++){
 
